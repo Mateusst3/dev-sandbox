@@ -146,13 +146,6 @@ export function ChatPage() {
     }
   };
 
-  const emptyState = useMemo(() => {
-    if (loadingChats) return "Carregando conversas...";
-    if (chats.length === 0) return "Crie sua primeira conversa.";
-    if (!activeChatId) return "Selecione uma conversa.";
-    return null;
-  }, [loadingChats, chats.length, activeChatId]);
-
   const openSidebar = () => {
     setSidebarMounted(true);
     requestAnimationFrame(() => setSidebarOpen(true));
@@ -163,13 +156,20 @@ export function ChatPage() {
     window.setTimeout(() => setSidebarMounted(false), 220);
   };
 
+  const emptyState = useMemo(() => {
+    if (loadingChats) return "Carregando conversas...";
+    if (chats.length === 0) return "Crie sua primeira conversa.";
+    if (!activeChatId) return "Selecione uma conversa.";
+    return null;
+  }, [loadingChats, chats.length, activeChatId]);
+
   return (
     <div className="flex flex-col gap-6 md:flex-row">
       <div className="flex items-center justify-between md:hidden">
         <button
           type="button"
           onClick={openSidebar}
-          className="rounded-md border border-slate-200 bg-white p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+          className="rounded-md border border-app-border bg-app-card p-2 text-slate-600 shadow-sm transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
           aria-label="Abrir menu"
         >
           <svg
@@ -229,7 +229,7 @@ export function ChatPage() {
             onClick={closeSidebar}
           />
           <div
-            className={`absolute left-0 top-0 h-full w-72 bg-slate-50 p-4 shadow-xl transition-transform duration-200 dark:bg-slate-950 ${
+            className={`absolute left-0 top-0 h-full w-72 border-r border-app-border bg-app-card p-4 shadow-xl transition-transform duration-200 dark:border-slate-800 dark:bg-slate-900 ${
               sidebarOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >

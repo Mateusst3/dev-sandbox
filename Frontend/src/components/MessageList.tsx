@@ -14,12 +14,12 @@ export function MessageList({
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, showTyping]);
 
   return (
-    <div className="no-scrollbar flex h-[420px] flex-col gap-4 overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
+    <div className="no-scrollbar flex h-[420px] flex-col gap-4 overflow-y-auto rounded-xl border border-app-border bg-white/70 p-4 dark:border-slate-800 dark:bg-slate-900/70">
       {messages.length === 0 && !showTyping ? (
-        <div className="flex h-full items-center justify-center text-sm text-slate-500">
+        <div className="flex h-full items-center justify-center text-sm text-slate-500 dark:text-slate-400">
           Nenhuma mensagem ainda. Inicie a conversa.
         </div>
       ) : (

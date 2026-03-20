@@ -26,7 +26,7 @@ export function ChatSidebar({
 
   return (
     <aside className={cn("w-full max-w-[260px] shrink-0", className)}>
-      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="rounded-2xl border border-app-border bg-app-card p-4 shadow-panel dark:border-slate-800 dark:bg-slate-900">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
             Conversas
@@ -35,7 +35,7 @@ export function ChatSidebar({
             Novo
           </Button>
         </div>
-        <div className="mt-4 flex max-h-[520px] flex-col gap-2 overflow-y-auto">
+        <div className="mt-4 flex max-h-[520px] flex-col gap-2 overflow-y-auto no-scrollbar">
           {chats.length === 0 ? (
             <p className="text-sm text-slate-500">Nenhuma conversa.</p>
           ) : (
@@ -46,7 +46,7 @@ export function ChatSidebar({
                   "group flex items-center justify-between gap-2 rounded-lg border border-transparent px-3 py-2 text-left text-sm transition",
                   chat.id === activeChatId
                     ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-                    : "hover:border-slate-200 hover:bg-slate-50 dark:hover:border-slate-700 dark:hover:bg-slate-800"
+                    : "text-slate-700 hover:border-app-border hover:bg-slate-50 dark:text-slate-200 dark:hover:border-slate-800 dark:hover:bg-slate-800"
                 )}
               >
                 <button
@@ -77,7 +77,7 @@ export function ChatSidebar({
                         }
                         setActionsChatId(null);
                       }}
-                      className="rounded-md p-1 text-slate-400 transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                      className="rounded-md p-1 text-slate-200 transition hover:bg-white/10"
                       aria-label="Renomear conversa"
                       title="Renomear"
                     >
@@ -102,7 +102,7 @@ export function ChatSidebar({
                         }
                         setActionsChatId(null);
                       }}
-                      className="rounded-md p-1 text-slate-400 transition hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-500/10 dark:hover:text-rose-300"
+                      className="rounded-md p-1 text-rose-200 transition hover:bg-rose-500/10"
                       aria-label="Excluir conversa"
                       title="Excluir"
                     >
@@ -131,7 +131,7 @@ export function ChatSidebar({
                         current === chat.id ? null : chat.id
                       );
                     }}
-                    className="rounded-md p-1 text-slate-400 opacity-0 transition hover:bg-slate-100 hover:text-slate-900 group-hover:opacity-100 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                    className="rounded-md p-1 text-slate-200/70 opacity-0 transition hover:bg-white/10 group-hover:opacity-100"
                     aria-label="Acoes da conversa"
                     title="Acoes"
                   >

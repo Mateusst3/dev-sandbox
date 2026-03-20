@@ -4,20 +4,14 @@ import { RequireAuth } from "./components/RequireAuth";
 import { AuthPage } from "./pages/AuthPage";
 import { ChatPage } from "./pages/ChatPage";
 import { ProfilePage } from "./pages/ProfilePage";
-import { useAuth } from "./context/AuthContext";
-
-function HomeRedirect() {
-  const { session, loading } = useAuth();
-  if (loading) return null;
-  return <Navigate to={session ? "/chat" : "/auth"} replace />;
-}
+import { LandingPage } from "./pages/LandingPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <AppShell>
         <Routes>
-          <Route path="/" element={<HomeRedirect />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route
             path="/chat"

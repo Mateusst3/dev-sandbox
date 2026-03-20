@@ -14,7 +14,7 @@ import { Label } from "../components/ui/label";
 
 const profileSchema = z.object({
   name: z.string().min(2, "Informe o nome"),
-  email: z.string().email("Email inválido"),
+  email: z.string().email("Email invalido"),
 });
 
 export function ProfilePage() {
@@ -40,7 +40,7 @@ export function ProfilePage() {
     setMessage(null);
     const result = profileSchema.safeParse(form);
     if (!result.success) {
-      setError(result.error.issues[0]?.message ?? "Dados inválidos");
+      setError(result.error.issues[0]?.message ?? "Dados invalidos");
       return;
     }
     setLoading(true);
@@ -88,7 +88,7 @@ export function ProfilePage() {
             <p className="text-sm text-emerald-600">{message}</p>
           ) : null}
           <Button type="submit" disabled={loading}>
-            {loading ? "Salvando..." : "Salvar alterações"}
+            {loading ? "Salvando..." : "Salvar alteracoes"}
           </Button>
         </form>
       </CardContent>

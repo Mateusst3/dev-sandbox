@@ -15,14 +15,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import { useAuth } from "../context/AuthContext";
 
 const loginSchema = z.object({
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
+  email: z.string().email("Email invalido"),
+  password: z.string().min(6, "Minimo 6 caracteres"),
 });
 
 const registerSchema = z.object({
   name: z.string().min(2, "Informe o nome"),
-  email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Mínimo 6 caracteres"),
+  email: z.string().email("Email invalido"),
+  password: z.string().min(6, "Minimo 6 caracteres"),
 });
 
 export function AuthPage() {
@@ -43,7 +43,7 @@ export function AuthPage() {
     setError(null);
     const result = loginSchema.safeParse(loginForm);
     if (!result.success) {
-      setError(result.error.issues[0]?.message ?? "Dados inválidos");
+      setError(result.error.issues[0]?.message ?? "Dados invalidos");
       return;
     }
     setLoading(true);
@@ -62,7 +62,7 @@ export function AuthPage() {
     setError(null);
     const result = registerSchema.safeParse(registerForm);
     if (!result.success) {
-      setError(result.error.issues[0]?.message ?? "Dados inválidos");
+      setError(result.error.issues[0]?.message ?? "Dados invalidos");
       return;
     }
     setLoading(true);
@@ -82,7 +82,7 @@ export function AuthPage() {
         <CardHeader>
           <CardTitle>Bem-vindo</CardTitle>
           <CardDescription>
-            Entre na sua conta ou crie uma nova para começar a conversa.
+            Entre na sua conta ou crie uma nova para comecar a conversa.
           </CardDescription>
         </CardHeader>
         <CardContent>

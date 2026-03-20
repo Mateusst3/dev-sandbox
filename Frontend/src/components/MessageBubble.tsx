@@ -21,14 +21,14 @@ export function MessageBubble({ message }: { message: Message }) {
           "relative w-full max-w-[520px] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm",
           isUser
             ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
-            : "bg-white text-slate-800 border border-slate-200 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100"
+            : "border border-app-border bg-app-card text-slate-800 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100"
         )}
       >
         <p
           ref={contentRef}
           className={cn(
             "whitespace-pre-wrap break-words",
-            expanded ? "" : "message-clamp"
+            expanded ? "" : "line-clamp-8"
           )}
         >
           {message.content}
@@ -40,7 +40,7 @@ export function MessageBubble({ message }: { message: Message }) {
             className={cn(
               "mt-2 text-xs font-medium",
               isUser
-                ? "text-slate-200 hover:text-white dark:text-slate-700 dark:hover:text-slate-900"
+                ? "text-white/80 hover:text-white"
                 : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
             )}
           >
@@ -50,7 +50,7 @@ export function MessageBubble({ message }: { message: Message }) {
         <span
           className={cn(
             "mt-2 block text-xs",
-            isUser ? "text-slate-300" : "text-slate-400"
+            isUser ? "text-white/70" : "text-slate-400"
           )}
         >
           {new Date(message.createdAt).toLocaleTimeString("pt-BR", {

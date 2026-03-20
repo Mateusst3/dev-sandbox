@@ -24,10 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    const appRoot = document.getElementById("root");
     root.classList.toggle("dark", theme === "dark");
-    document.body.classList.toggle("dark", theme === "dark");
-    appRoot?.classList.toggle("dark", theme === "dark");
     root.setAttribute("data-theme", theme);
     root.style.colorScheme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
