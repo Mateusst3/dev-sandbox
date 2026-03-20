@@ -15,14 +15,25 @@ services:
       - ./Backend/.env
     ports:
       - "3001:3001"
+    volumes:
+      - ./Backend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - database
+      - llm
 
   frontend:
     build:
       context: ./Frontend
     ports:
       - "5173:5173"
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     depends_on:
       - backend
 

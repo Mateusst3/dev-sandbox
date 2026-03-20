@@ -1,8 +1,6 @@
-import Fastify from "fastify";
+import { buildServer } from "./server.js";
 
-const server = Fastify({ logger: true });
-
-server.get("/health", async () => ({ ok: true }));
+const server = buildServer();
 
 const port = Number(process.env.PORT ?? 3001);
 const host = process.env.HOST ?? "0.0.0.0";
