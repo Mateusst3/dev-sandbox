@@ -1,0 +1,39 @@
+services:
+  database:
+    image: postgres:16-alpine
+    env_file:
+      - ./DataBase/postgres.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./Backend
+    env_file:
+      - ./Backend/.env
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./Frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  llm:
+    build:
+      context: ./LLM
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+volumes:
+  pgdata:
+  ollama:
