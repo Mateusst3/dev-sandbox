@@ -17,7 +17,7 @@ export function MessageList({
   }, [messages]);
 
   return (
-    <div className="flex h-[420px] flex-col gap-4 overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <div className="no-scrollbar flex h-[420px] flex-col gap-4 overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
       {messages.length === 0 && !showTyping ? (
         <div className="flex h-full items-center justify-center text-sm text-slate-500">
           Nenhuma mensagem ainda. Inicie a conversa.

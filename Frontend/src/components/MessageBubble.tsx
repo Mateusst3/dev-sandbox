@@ -1,20 +1,52 @@
+import { useEffect, useRef, useState } from "react";
 import type { Message } from "../types";
 import { cn } from "../lib/utils";
 
 export function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === "USER";
+  const contentRef = useRef<HTMLParagraphElement | null>(null);
+  const [expanded, setExpanded] = useState(false);
+  const [overflowing, setOverflowing] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    setOverflowing(el.scrollHeight > el.clientHeight);
+  }, [message.content, expanded]);
 
   return (
     <div className={cn("flex", isUser ? "justify-end" : "justify-start")}>
       <div
         className={cn(
-          "max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm",
+          "relative w-full max-w-[520px] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm",
           isUser
-            ? "bg-slate-900 text-white"
-            : "bg-white text-slate-800 border border-slate-200"
+            ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
+            : "bg-white text-slate-800 border border-slate-200 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100"
         )}
       >
-        <p className="whitespace-pre-wrap">{message.content}</p>
+        <p
+          ref={contentRef}
+          className={cn(
+            "whitespace-pre-wrap break-words",
+            expanded ? "" : "message-clamp"
+          )}
+        >
+          {message.content}
+        </p>
+        {overflowing ? (
+          <button
+            type="button"
+            onClick={() => setExpanded((value) => !value)}
+            className={cn(
+              "mt-2 text-xs font-medium",
+              isUser
+                ? "text-slate-200 hover:text-white dark:text-slate-700 dark:hover:text-slate-900"
+                : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+            )}
+          >
+            {expanded ? "Ver menos" : "Ver mais"}
+          </button>
+        ) : null}
         <span
           className={cn(
             "mt-2 block text-xs",

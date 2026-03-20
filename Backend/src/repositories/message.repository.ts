@@ -1,14 +1,15 @@
 import { prisma } from "../lib/prisma.js";
 import { MessageRole } from "@prisma/client";
 
-export const listMessagesByUser = (userId: string) =>
+export const listMessagesByChat = (chatId: string, userId: string) =>
   prisma.message.findMany({
-    where: { userId },
+    where: { chatId, userId },
     orderBy: { createdAt: "asc" },
   });
 
 export const createMessage = (data: {
   userId: string;
+  chatId: string;
   role: MessageRole;
   content: string;
 }) =>

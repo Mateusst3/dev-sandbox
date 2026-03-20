@@ -11,7 +11,15 @@ export type Session = {
 
 export type Message = {
   id: string;
+  chatId: string;
   role: "USER" | "AI";
   content: string;
   createdAt: string;
+};
+
+export type Chat = {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
 };

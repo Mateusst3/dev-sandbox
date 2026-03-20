@@ -19,6 +19,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dark,
+[data-theme="dark"] {
+  --background: 2 6 23;
+  --foreground: 248 250 252;
+  --card: 15 23 42;
+  --card-foreground: 248 250 252;
+  --primary: 226 232 240;
+  --primary-foreground: 15 23 42;
+  --muted: 30 41 59;
+  --muted-foreground: 148 163 184;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -42,7 +54,7 @@ h4 {
   height: 6px;
   width: 6px;
   border-radius: 9999px;
-  background: rgb(148 163 184);
+  background: currentColor;
   animation: typing-bounce 1.2s infinite ease-in-out;
 }
 
@@ -65,4 +77,20 @@ h4 {
     transform: translateY(-4px);
     opacity: 1;
   }
+}
+
+.message-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  overflow: hidden;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

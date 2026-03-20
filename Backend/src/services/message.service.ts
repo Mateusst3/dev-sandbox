@@ -1,14 +1,25 @@
 import { MessageRole } from "@prisma/client";
-import { createMessage, listMessagesByUser } from "../repositories/message.repository.js";
+import { createMessage, listMessagesByChat } from "../repositories/message.repository.js";
+import { requireChatForUser } from "./chat.service.js";
+import { touchChat } from "../repositories/chat.repository.js";
 import { generateWithDeepSeek } from "../lib/deepseek.js";
 import { generateWithOllama } from "../lib/ollama.js";
 
-export const getMessagesForUser = async (userId: string) =>
-  listMessagesByUser(userId);
+export const getMessagesForChat = async (chatId: string, userId: string) => {
+  await requireChatForUser(chatId, userId);
+  return listMessagesByChat(chatId, userId);
+};
 
-export const sendMessage = async (userId: string, content: string) => {
+export const sendMessage = async (
+  userId: string,
+  chatId: string,
+  content: string
+) => {
+  await requireChatForUser(chatId, userId);
+
   await createMessage({
     userId,
+    chatId,
     role: MessageRole.USER,
     content,
   });
@@ -29,9 +40,14 @@ export const sendMessage = async (userId: string, content: string) => {
     throw err;
   }
 
-  return createMessage({
+  const aiMessage = await createMessage({
     userId,
+    chatId,
     role: MessageRole.AI,
     content: aiText,
   });
+
+  await touchChat(chatId);
+
+  return aiMessage;
 };

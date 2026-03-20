@@ -29,7 +29,7 @@ export function ChatComposer({
       />
       <div className="flex justify-end">
         <Button type="submit" disabled={sending || !content.trim()}>
-          {sending ? "Enviando..." : "Enviar"}
+          Enviar
         </Button>
       </div>
     </form>

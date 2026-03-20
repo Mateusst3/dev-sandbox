@@ -4,16 +4,20 @@ import cors from "@fastify/cors";
 import { ZodError } from "zod";
 import { registerAuthRoutes } from "./routes/auth.routes.js";
 import { registerUserRoutes } from "./routes/user.routes.js";
-import { registerMessageRoutes } from "./routes/message.routes.js";
+import { registerChatRoutes } from "./routes/chat.routes.js";
 
 export const buildServer = () => {
   const server = Fastify({ logger: true });
 
+  const corsOrigin =
+    process.env.CORS_ORIGIN ?? "http://localhost:5173";
   server.register(cors, {
-    origin: true,
+    origin: corsOrigin.split(",").map((origin) => origin.trim()),
+    methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   });
 
-  const jwtSecret = process.env.JWT_SECRET ?? "change-me";
+  const jwtSecret = process.env.JWT_SECRET ?? "";
   server.register(jwt, { secret: jwtSecret });
 
   server.decorate("authenticate", async (request, _reply) => {
@@ -30,7 +34,7 @@ export const buildServer = () => {
 
     const statusCode = (error as { statusCode?: number }).statusCode;
     if (statusCode) {
-      return reply.code(statusCode).send({ message: error.message });
+      return reply.code(statusCode).send({ message: (error as any).message as string });
     }
 
     return reply.send(error);
@@ -40,7 +44,7 @@ export const buildServer = () => {
 
   registerAuthRoutes(server);
   registerUserRoutes(server);
-  registerMessageRoutes(server);
+  registerChatRoutes(server);
 
   return server;
 };

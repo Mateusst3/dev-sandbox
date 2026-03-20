@@ -6,6 +6,7 @@ export const messageBodySchema = z.object({
 
 export const messageResponseSchema = z.object({
   id: z.string(),
+  chatId: z.string(),
   role: z.enum(["USER", "AI"]),
   content: z.string(),
   createdAt: z.string(),
