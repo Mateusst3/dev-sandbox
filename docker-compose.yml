@@ -13,12 +13,14 @@ services:
       context: ./Backend
     env_file:
       - ./Backend/.env
+    environment:
+      - DATABASE_URL=postgresql://app:app@database:5432/chatdb?schema=public
+      - CORS_ORIGIN=http://localhost:5173
     ports:
       - "3001:3001"
     volumes:
       - ./Backend:/app
       - /app/node_modules
-    environment:
       - CHOKIDAR_USEPOLLING=true
     depends_on:
       - database
@@ -33,6 +35,7 @@ services:
       - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:3001
     depends_on:
       - backend
 
