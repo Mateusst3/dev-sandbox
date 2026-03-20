@@ -1,6 +1,6 @@
 # ChatDesk — Teste Tecnico Fullstack
 
-ChatDesk e uma aplicacao fullstack de chat com IA simulada, organizada por conversas, com login, perfil e historico. O backend usa Fastify + Prisma + Postgres, e o frontend usa React + Vite + Tailwind + Axios + Zod.
+ChatDesk é uma aplicacao fullstack de chat com IA simulada, organizada por conversas, com login, perfil e historico. O backend usa Fastify + Prisma + Postgres, e o frontend usa React + Vite + Tailwind + Axios + Zod.
 
 ## O que foi feito
 
@@ -109,7 +109,7 @@ Acesse:
 ## Observacoes
 
 - O projeto usa somente Tailwind para estilos (sem CSS custom).
-- A IA real (DeepSeek) e opcional: sem chave, o backend responde com mensagens mockadas.
+- A IA real (DeepSeek) é opcional: sem chave, o backend responde com mensagens mockadas.
 - Tema claro/escuro pode ser alternado na UI.
 
 ## Scripts
@@ -124,4 +124,4 @@ Acesse:
 
 ---
 
-Qualquer duvida, e so chamar.
+Qualquer duvida, é so chamar.
