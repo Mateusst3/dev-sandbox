@@ -1,5 +1,6 @@
 import { MessageRole } from "@prisma/client";
 import { createMessage, listMessagesByUser } from "../repositories/message.repository.js";
+import { generateWithDeepSeek } from "../lib/deepseek.js";
 import { generateWithOllama } from "../lib/ollama.js";
 
 export const getMessagesForUser = async (userId: string) =>
@@ -12,11 +13,18 @@ export const sendMessage = async (userId: string, content: string) => {
     content,
   });
 
+  const provider = (process.env.AI_PROVIDER ?? "deepseek").toLowerCase();
   let aiText: string;
   try {
-    aiText = await generateWithOllama(content);
+    if (provider === "ollama") {
+      aiText = await generateWithOllama(content);
+    } else {
+      aiText = await generateWithDeepSeek(content);
+    }
   } catch (error) {
-    const err = new Error("Ollama error.");
+    const err = new Error(
+      provider === "ollama" ? "Ollama error." : "DeepSeek error."
+    );
     (err as { statusCode?: number }).statusCode = 502;
     throw err;
   }

@@ -16,9 +16,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/cors": "^11.2.0",
     "@fastify/jwt": "^10.0.0",
+    "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "fastify": "^5.8.2",
+    "pg": "^8.20.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {

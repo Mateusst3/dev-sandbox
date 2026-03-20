@@ -8,4 +8,4 @@ if [ -n "${OLLAMA_MODEL:-}" ]; then
   ollama pull "$OLLAMA_MODEL"
 fi
 
-wait -n
+wait

@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import jwt from "@fastify/jwt";
+import cors from "@fastify/cors";
 import { ZodError } from "zod";
 import { registerAuthRoutes } from "./routes/auth.routes.js";
 import { registerUserRoutes } from "./routes/user.routes.js";
@@ -7,6 +8,10 @@ import { registerMessageRoutes } from "./routes/message.routes.js";
 
 export const buildServer = () => {
   const server = Fastify({ logger: true });
+
+  server.register(cors, {
+    origin: true,
+  });
 
   const jwtSecret = process.env.JWT_SECRET ?? "change-me";
   server.register(jwt, { secret: jwtSecret });

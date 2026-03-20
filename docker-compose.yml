@@ -22,7 +22,6 @@ services:
       - CHOKIDAR_USEPOLLING=true
     depends_on:
       - database
-      - llm
 
   frontend:
     build:
@@ -37,14 +36,6 @@ services:
     depends_on:
       - backend
 
-  llm:
-    build:
-      context: ./LLM
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama:/root/.ollama
 
 volumes:
   pgdata:
-  ollama:
